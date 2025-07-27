@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform moveChar;
+    [SerializeField] private Vector3 cameraRotation = new (0,0,-8);
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        
+        if (!moveChar) return;
+        transform.position = moveChar.position + cameraRotation;
     }
 }

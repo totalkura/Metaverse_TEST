@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private Camera camera;
-
     private float move_Speed = 3f;
 
     private AnimationHandler animationHandler;
