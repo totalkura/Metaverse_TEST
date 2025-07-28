@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InGameScore : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    TextMeshProUGUI scoreText;
+    TextMeshProUGUI bestScoreText;
+
+    Button returnButton;
+
+    public void Init()
     {
-        
+        scoreText = transform.Find("NowScore").GetComponent<TextMeshProUGUI>();
+        bestScoreText = transform.Find("BestScore").GetComponent <TextMeshProUGUI>();
+        returnButton = transform.Find("ReturnButton").GetComponent<Button>();
+
+        returnButton.onClick.AddListener(OnClickReturnButton);
+
+        Time.timeScale = 0f;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetUI(int score,int bestScore)
     {
-        
+        scoreText.text = score.ToString();
+        bestScoreText.text = bestScore.ToString();
+    }
+
+    public void OnClickReturnButton()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

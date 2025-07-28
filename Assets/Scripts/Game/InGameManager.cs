@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InGameManager : MonoBehaviour
 {
@@ -10,11 +9,16 @@ public class InGameManager : MonoBehaviour
     public InGameUIManager InGameUIManager { get { return InGameUIManager; } }
 
     private int currentScore = 0;
+    private float maxScore;
 
     private void Awake()
     {
         inGameManager = this;
         inGameUIManager = FindObjectOfType<InGameUIManager>();
+
+        maxScore = PlayerPrefs.GetFloat("MaxScore",0f);
+
+        Time.timeScale = 0f;
     }
 
     private void Start()
@@ -22,19 +26,34 @@ public class InGameManager : MonoBehaviour
         inGameUIManager.UpdateScore(0);
     }
 
-    public void GameOver()
+    private void Update()
     {
-        inGameUIManager.ShowScore();
+           
     }
 
-    public void ReturnMainScene()
+    public int Score()
     {
-        SceneManager.LoadScene("MainScene");
+        return currentScore;
+    }
+
+    public int BestScore()
+    {
+        return (int)maxScore;
     }
 
     public void AddScore(int score)
     {
         currentScore += score;
-        inGameUIManager.UpdateScore(currentScore);
+        inGameUIManager.UpdateScore((int)currentScore);
+    }
+
+    public void Gameover()
+    {
+        inGameUIManager.GameOver();
+        if (currentScore > (int)maxScore)
+            PlayerPrefs.SetFloat("MaxScore", currentScore);
+        else
+            PlayerPrefs.SetFloat("NowScore", currentScore);
+        inGameUIManager.SetScoreUI(currentScore,(int)maxScore);
     }
 }

@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameMain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Button startButton;
+
+    public void Init()
     {
-        
+        startButton = transform.Find("StartButton").GetComponent<Button>();
+
+        startButton.onClick.AddListener(OnClickStartButton);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickStartButton()
     {
-        
+        Time.timeScale = 1f;
     }
+
 }
