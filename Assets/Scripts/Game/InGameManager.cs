@@ -6,7 +6,7 @@ public class InGameManager : MonoBehaviour
     public static InGameManager Instance { get { return inGameManager; } }
 
     InGameUIManager inGameUIManager;
-    public InGameUIManager InGameUIManager { get { return InGameUIManager; } }
+    public InGameUIManager InGameUIManager { get { return inGameUIManager; } }
 
     private int currentScore = 0;
     private float maxScore;
