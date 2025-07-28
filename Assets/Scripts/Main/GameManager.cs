@@ -14,11 +14,15 @@ public class GameManager : MonoBehaviour
     private float lastScore;
 
     private string effects;
+
+    private bool fireOn = false;
     private void Awake()
     {
         gameManager = this;
 
         //PlayerPrefs.SetString("Effect", "");
+        fireOn = PlayerPrefs.GetString("Effect", "")=="True" ? true:false;
+
 
         uiManager = FindObjectOfType<UIManager>();
         playerMover = FindObjectOfType<PlayerMove>();
@@ -42,7 +46,8 @@ public class GameManager : MonoBehaviour
         if (effects == "True")
         {
             uiManager.SetConver(playerMover.npc, false, true);
-            Fire.SetActive(true);
+            if(!fireOn)
+                Fire.SetActive(true);
         }
         else uiManager.SetConver(playerMover.npc, playerMover.born);
     }
