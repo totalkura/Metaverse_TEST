@@ -15,7 +15,7 @@ public class InGameManager : MonoBehaviour
     {
         inGameManager = this;
         inGameUIManager = FindObjectOfType<InGameUIManager>();
-
+        
         maxScore = PlayerPrefs.GetFloat("MaxScore",0f);
 
         Time.timeScale = 0f;

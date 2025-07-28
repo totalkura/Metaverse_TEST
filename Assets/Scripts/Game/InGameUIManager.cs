@@ -20,15 +20,12 @@ public class InGameUIManager : MonoBehaviour
     InGameGame inGameGame = null;
     InGameMain inGameMain = null;
 
-    InGameManager inGameManager;
 
     UIState currentState = UIState.Main;
 
     private void Awake()
     {
         instance = this;
-
-        inGameManager = GetComponent<InGameManager>();
 
         inGameGame = GetComponentInChildren<InGameGame>(true);
         inGameGame?.Init();
