@@ -1,19 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    static GameManager gameManager;
+    public static GameManager Instance { get { return gameManager; } }
+
+    UIManager uiManager;
+
+    private float HighScore;
+    private float LastScore;
+
+    private void Awake()
     {
-        
+        gameManager = this;
+
+
+        uiManager = FindObjectOfType<UIManager>();
+
+        HighScore = PlayerPrefs.GetFloat("MaxScore", 0f);
+        LastScore = PlayerPrefs.GetFloat("NowScore", 0f);
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void Start()
     {
-       
-            
+        uiManager.SetUI((int)LastScore, (int)HighScore);
     }
+
 }
