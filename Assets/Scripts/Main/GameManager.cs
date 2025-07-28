@@ -6,9 +6,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return gameManager; } }
 
     UIManager uiManager;
+    PlayerMove playerMover;
 
-    private float HighScore;
-    private float LastScore;
+    private float highScore;
+    private float lastScore;
+
+    private bool action = false;
 
     private void Awake()
     {
@@ -16,16 +19,24 @@ public class GameManager : MonoBehaviour
 
 
         uiManager = FindObjectOfType<UIManager>();
+        playerMover = FindObjectOfType<PlayerMove>();
 
-        HighScore = PlayerPrefs.GetFloat("MaxScore", 0f);
-        LastScore = PlayerPrefs.GetFloat("NowScore", 0f);
+        highScore = PlayerPrefs.GetFloat("MaxScore", 0f);
+        lastScore = PlayerPrefs.GetFloat("NowScore", 0f);
 
     }
+
 
 
     void Start()
     {
-        uiManager.SetUI((int)LastScore, (int)HighScore);
+        uiManager.SetUI((int)lastScore, (int)highScore);
     }
+
+    private void Update()
+    {
+        uiManager.SetConver(playerMover.npc);
+    }
+
 
 }

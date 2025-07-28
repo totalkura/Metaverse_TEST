@@ -1,10 +1,14 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
     private float move_Speed = 3f;
 
     private AnimationHandler animationHandler;
+
+    public bool npc = false;
 
     void Awake()
     {
@@ -17,6 +21,12 @@ public class PlayerMove : MonoBehaviour
         Vector2 pushInput = GetInputmove();
         animationHandler.Move(pushInput);
         MoveCharacter(pushInput);
+
+        if (npc)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+                SceneManager.LoadScene("GameScene");
+        }
     }
 
     Vector2 GetInputmove()
@@ -37,4 +47,15 @@ public class PlayerMove : MonoBehaviour
         Vector3 moves = new Vector3 (direction.x, direction.y,0);
         transform.position += moves * move_Speed * Time.deltaTime;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("NPC")) npc = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("NPC")) npc = false;
+    }
+
 }
