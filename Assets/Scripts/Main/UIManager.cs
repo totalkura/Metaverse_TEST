@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI bestScoreText;
 
     public GameObject ConverImage;
+    public GameObject ConverImage2;
+    public GameObject ConverImage3;
 
     public void SetUI(int score, int bestScore)
     {
@@ -14,8 +16,12 @@ public class UIManager : MonoBehaviour
         bestScoreText.text = bestScore.ToString();
     }
 
-    public void SetConver(bool on)
+    public void SetConver(bool onOne, bool onTwo,bool Fire = false)
     {
-        ConverImage.SetActive(on);
+        ConverImage.SetActive(onOne);
+        ConverImage2.SetActive(onTwo);
+        ConverImage3.SetActive(Fire);
     }
+
+
 }

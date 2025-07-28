@@ -5,24 +5,27 @@ public class GameManager : MonoBehaviour
     static GameManager gameManager;
     public static GameManager Instance { get { return gameManager; } }
 
+    public GameObject Fire;
+
     UIManager uiManager;
     PlayerMove playerMover;
 
     private float highScore;
     private float lastScore;
 
-    private bool action = false;
-
+    private string effects;
     private void Awake()
     {
         gameManager = this;
 
+        //PlayerPrefs.SetString("Effect", "");
 
         uiManager = FindObjectOfType<UIManager>();
         playerMover = FindObjectOfType<PlayerMove>();
 
         highScore = PlayerPrefs.GetFloat("MaxScore", 0f);
         lastScore = PlayerPrefs.GetFloat("NowScore", 0f);
+
 
     }
 
@@ -35,7 +38,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        uiManager.SetConver(playerMover.npc);
+        effects = PlayerPrefs.GetString("Effect", "");
+        if (effects == "True")
+        {
+            uiManager.SetConver(playerMover.npc, false, true);
+            Fire.SetActive(true);
+        }
+        else uiManager.SetConver(playerMover.npc, playerMover.born);
     }
 
 

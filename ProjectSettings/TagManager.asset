@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BackGround
   - NPC
+  - born
   layers:
   - Default
   - TransparentFX

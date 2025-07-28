@@ -50,10 +50,16 @@ public class InGameManager : MonoBehaviour
     public void Gameover()
     {
         inGameUIManager.GameOver();
+        PlayerPrefs.SetFloat("NowScore", currentScore);
         if (currentScore > (int)maxScore)
+        {
             PlayerPrefs.SetFloat("MaxScore", currentScore);
+            
+            inGameUIManager.SetScoreUI(currentScore, currentScore);
+        }
         else
-            PlayerPrefs.SetFloat("NowScore", currentScore);
-        inGameUIManager.SetScoreUI(currentScore,(int)maxScore);
+        {
+            inGameUIManager.SetScoreUI(currentScore, (int)maxScore);
+        }
     }
 }

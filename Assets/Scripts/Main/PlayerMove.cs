@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     private AnimationHandler animationHandler;
 
     public bool npc = false;
-
+    public bool born = false;
     void Awake()
     {
         animationHandler = GetComponentInChildren<AnimationHandler>();
@@ -26,6 +26,14 @@ public class PlayerMove : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
                 SceneManager.LoadScene("GameScene");
+        }
+        else if (born)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PlayerPrefs.SetString("Effect", "True");
+            }
+                
         }
     }
 
@@ -51,11 +59,13 @@ public class PlayerMove : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("NPC")) npc = true;
+        if (collision.CompareTag("born")) born = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("NPC")) npc = false;
+        if (collision.CompareTag("born")) born = false;
     }
 
 }
